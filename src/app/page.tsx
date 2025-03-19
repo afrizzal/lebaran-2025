@@ -30,8 +30,9 @@ export default function Home() {
   const [isSweetAlertLoaded, setIsSweetAlertLoaded] = useState(false);
   const [isAnimeLoaded, setIsAnimeLoaded] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [showDecorations, setShowDecorations] = useState(false);
   const [familyName, setFamilyName] = useState<string>('Al-Batul');
-  const phoneNumber = '6285330265202'; // Ganti dengan nomor WhatsApp tujuan
+  const phoneNumber = '628123456789'; // Ganti dengan nomor WhatsApp tujuan
   const chatMessage = "Selamat Hari Raya Idul Fitri, mohon maaf lahir dan batin. Semoga kita selalu diberikan kesehatan, kebahagiaan, dan keberkahan dalam hidup. Taqabbalallahu minna wa minkum.";
 
   // Mengambil nama keluarga dari URL
@@ -42,6 +43,8 @@ export default function Home() {
       if (nameParam) {
         setFamilyName(decodeURIComponent(nameParam.replace(/\+/g, ' ')));
       }
+      // Tampilkan dekorasi setelah halaman dimuat
+      setShowDecorations(true);
     }
   }, []);
 
@@ -438,6 +441,52 @@ export default function Home() {
     }
   };
 
+  // Fungsi untuk membuat diamonds bergerak naik
+  const renderDiamonds = () => {
+    return [...Array(12)].map((_, i) => (
+      <div key={`diamond-${i}`} className="diamond" style={{
+        left: `${Math.random() * 100}%`,
+        animationDuration: `${10 + Math.random() * 10}s`,
+        animationDelay: `${Math.random() * 5}s`
+      }}>
+        <Image 
+          src="/asset/diamond.svg" 
+          alt="Diamond" 
+          width={30} 
+          height={30}
+          priority
+          unoptimized
+        />
+      </div>
+    ));
+  };
+
+  // Fungsi untuk menampilkan ornamen
+  const renderOrnaments = () => {
+    return (
+      <>
+        <div className="ornament ornament-yellow-big">
+          <Image src="/asset/yellow-big.svg" alt="Ornamen" width={120} height={120} priority unoptimized />
+        </div>
+        <div className="ornament ornament-yellow-medium">
+          <Image src="/asset/yellow-medium.svg" alt="Ornamen" width={100} height={100} priority unoptimized />
+        </div>
+        <div className="ornament ornament-yellow-small">
+          <Image src="/asset/yellow-small.svg" alt="Ornamen" width={80} height={80} priority unoptimized />
+        </div>
+        <div className="ornament ornament-green-big">
+          <Image src="/asset/green-big.svg" alt="Ornamen" width={120} height={120} priority unoptimized />
+        </div>
+        <div className="ornament ornament-green-medium">
+          <Image src="/asset/green-medium.svg" alt="Ornamen" width={100} height={100} priority unoptimized />
+        </div>
+        <div className="ornament ornament-green-small">
+          <Image src="/asset/green-small.svg" alt="Ornamen" width={80} height={80} priority unoptimized />
+        </div>
+      </>
+    );
+  };
+
   return (
     <>
       {/* Debugging info - hanya muncul jika ada error */}
@@ -457,6 +506,20 @@ export default function Home() {
         </div>
       )}
 
+      {/* Ornamen Background */}
+      {showDecorations && (
+        <div className="ornaments-container">
+          {renderOrnaments()}
+        </div>
+      )}
+
+      {/* Diamonds Container */}
+      {showDecorations && (
+        <div className="diamonds-container">
+          {renderDiamonds()}
+        </div>
+      )}
+
       <audio ref={audioRef} src="/music/lebaran.mp3" loop />
       
       {/* Fallback content jika tidak ada yang muncul */}
@@ -470,7 +533,6 @@ export default function Home() {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          background: 'var(--background-color)',
           zIndex: 5
         }}>
           <p>Loading Lebaran greeting...</p>
@@ -525,17 +587,6 @@ export default function Home() {
               </span>
             </h1>
             <h2 className="medium-text">Selamat datang di ucapan Lebaran 2025</h2>
-            <div className="svg-container mosque-animation">
-              <Image 
-                src="/img/mosque.svg" 
-                alt="Masjid" 
-                width={200} 
-                height={200} 
-                className="svg-animation"
-                priority
-                unoptimized
-              />
-            </div>
           </div>
         </div>
       )}
@@ -547,7 +598,7 @@ export default function Home() {
             <h1 className="ml3">Selamat Hari Raya Idul Fitri 1446 H</h1>
             <div className="svg-container lantern-animation">
               <Image 
-                src="/img/lantern.svg" 
+                src="/asset/lentera-1.svg" 
                 alt="Lentera" 
                 width={100} 
                 height={100} 
@@ -556,7 +607,7 @@ export default function Home() {
                 unoptimized
               />
               <Image 
-                src="/img/crescent-moon.svg" 
+                src="/asset/moon.svg" 
                 alt="Bulan Sabit" 
                 width={120} 
                 height={120} 
@@ -565,7 +616,7 @@ export default function Home() {
                 unoptimized
               />
               <Image 
-                src="/img/lantern.svg" 
+                src="/asset/lentera-2.svg" 
                 alt="Lentera" 
                 width={100} 
                 height={100} 
@@ -593,17 +644,6 @@ export default function Home() {
                 Lanjutkan
               </button>
             )}
-            <div className="svg-container alquran-animation">
-              <Image 
-                src="/img/alquran.svg" 
-                alt="Al-Quran" 
-                width={80} 
-                height={80} 
-                className="svg-animation"
-                priority
-                unoptimized
-              />
-            </div>
           </div>
         </div>
       )}
@@ -617,17 +657,6 @@ export default function Home() {
                 <span className="letters">Mohon Maaf Lahir dan Batin</span>
               </span>
             </h1>
-            <div className="svg-container praying-animation">
-              <Image 
-                src="/img/praying.svg" 
-                alt="Berdoa" 
-                width={150} 
-                height={150} 
-                className="svg-animation"
-                priority
-                unoptimized
-              />
-            </div>
           </div>
         </div>
       )}
@@ -641,17 +670,6 @@ export default function Home() {
                 <span className="letters">Semoga Taqwa Kita Diterima</span>
               </span>
             </h1>
-            <div className="svg-container bedug-animation">
-              <Image 
-                src="/img/bedug.svg" 
-                alt="Bedug" 
-                width={120} 
-                height={120} 
-                className="svg-animation"
-                priority
-                unoptimized
-              />
-            </div>
           </div>
         </div>
       )}
@@ -683,12 +701,22 @@ export default function Home() {
           </div>
           {showLanterns && (
             <div className="lanterns-container">
-              {[...Array(15)].map((_, i) => (
-                <div key={i} className={`lantern lantern-${i % 3 + 1}`} style={{
+              {[...Array(8)].map((_, i) => (
+                <div key={i} className="lantern" style={{
                   left: `${Math.random() * 100}%`,
                   animationDelay: `${Math.random() * 2}s`,
                   animationDuration: `${3 + Math.random() * 2}s`
-                }}></div>
+                }}>
+                  <Image 
+                    src={i % 2 === 0 ? "/asset/lentera-1.svg" : "/asset/lentera-2.svg"} 
+                    alt="Lentera" 
+                    width={80} 
+                    height={120} 
+                    className={i % 2 === 0 ? "lentera-1" : "lentera-2"}
+                    priority
+                    unoptimized
+                  />
+                </div>
               ))}
             </div>
           )}
@@ -746,15 +774,23 @@ export default function Home() {
           )}
 
           <div className="crescent-container">
-            {[...Array(20)].map((_, i) => (
+            {[...Array(10)].map((_, i) => (
               <div key={i} className="crescent" style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
                 animationDelay: `${Math.random() * 5}s`,
                 animationDuration: `${5 + Math.random() * 10}s`,
-                fontSize: `${10 + Math.random() * 20}px`,
-                opacity: 0.7 + Math.random() * 0.3
-              }}>☪️</div>
+              }}>
+                <Image 
+                  src="/asset/moon.svg" 
+                  alt="Bulan Sabit" 
+                  width={80} 
+                  height={80} 
+                  className="moon-svg"
+                  priority
+                  unoptimized
+                />
+              </div>
             ))}
           </div>
         </div>
