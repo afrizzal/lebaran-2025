@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import { SparklesCore } from '@/components/ui/sparkles';
 
 // Deklarasi tipe SweetAlert2
 declare global {
@@ -32,17 +33,42 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
   const [showDecorations, setShowDecorations] = useState(false);
   const [familyName, setFamilyName] = useState<string>('Al-Batul');
-  const phoneNumber = '628123456789'; // Ganti dengan nomor WhatsApp tujuan
+  const [phoneNumber, setPhoneNumber] = useState('6281234567890'); // Default dengan kode Indonesia
   const chatMessage = "Selamat Hari Raya Idul Fitri, mohon maaf lahir dan batin. Semoga kita selalu diberikan kesehatan, kebahagiaan, dan keberkahan dalam hidup. Taqabbalallahu minna wa minkum.";
 
-  // Mengambil nama keluarga dari URL
+  // Mengambil nama keluarga dan nomor telepon dari URL
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const urlParams = new URLSearchParams(window.location.search);
+      
+      // Mengambil parameter nama keluarga
       const nameParam = urlParams.get('nama_keluarga');
       if (nameParam) {
         setFamilyName(decodeURIComponent(nameParam.replace(/\+/g, ' ')));
       }
+      
+      // Mengambil parameter nomor telepon
+      const phoneParam = urlParams.get('nomor_wa');
+      if (phoneParam) {
+        // Pastikan format nomor benar (tambahkan 62 jika belum ada)
+        let formattedPhone = phoneParam.replace(/\s+/g, '');
+        
+        // Jika dimulai dengan 0, ganti dengan 62
+        if (formattedPhone.startsWith('0')) {
+          formattedPhone = '62' + formattedPhone.substring(1);
+        } 
+        // Jika dimulai dengan +62, hilangkan +
+        else if (formattedPhone.startsWith('+62')) {
+          formattedPhone = formattedPhone.substring(1);
+        }
+        // Jika tidak dimulai dengan 62, tambahkan 62
+        else if (!formattedPhone.startsWith('62')) {
+          formattedPhone = '62' + formattedPhone;
+        }
+        
+        setPhoneNumber(formattedPhone);
+      }
+      
       // Tampilkan dekorasi setelah halaman dimuat
       setShowDecorations(true);
     }
@@ -140,90 +166,16 @@ export default function Home() {
           });
       }
 
-      // Animasi untuk ML3 (Letters Fade In)
-      if (document.querySelector('.ml3') && currentStep === 2) {
-        const textWrapper = document.querySelector('.ml3');
-        if (textWrapper) {
-          textWrapper.innerHTML = textWrapper.textContent!.replace(/\S/g, "<span class='letter'>$&</span>");
-        }
-        
+      // Animasi untuk teks biasa dengan fade effect
+      if (document.querySelector('.animate-text') && (currentStep === 2 || currentStep === 4 || currentStep === 5 || currentStep === 6 || currentStep === 7)) {
         window.anime.timeline({loop: false})
           .add({
-            targets: '.ml3 .letter',
-            opacity: [0,1],
-            easing: "easeInOutQuad",
-            duration: 2250,
-            delay: (el: any, i: number) => 150 * (i+1)
-          });
-      }
-
-      // Animasi untuk ML6 (Letters Rotation)
-      if (document.querySelector('.ml6') && currentStep === 4) {
-        const textWrapper = document.querySelector('.ml6 .letters');
-        if (textWrapper) {
-          textWrapper.innerHTML = textWrapper.textContent!.replace(/\S/g, "<span class='letter'>$&</span>");
-        }
-        
-        window.anime.timeline({loop: false})
-          .add({
-            targets: '.ml6 .letter',
-            translateY: ["1.1em", 0],
-            translateZ: 0,
-            duration: 750,
-            delay: (el: any, i: number) => 50 * i
-          });
-      }
-
-      // Animasi untuk ML9 (Letters Scale)
-      if (document.querySelector('.ml9') && currentStep === 5) {
-        const textWrapper = document.querySelector('.ml9 .letters');
-        if (textWrapper) {
-          textWrapper.innerHTML = textWrapper.textContent!.replace(/\S/g, "<span class='letter'>$&</span>");
-        }
-        
-        window.anime.timeline({loop: false})
-          .add({
-            targets: '.ml9 .letter',
-            scale: [0, 1],
-            duration: 1500,
-            elasticity: 600,
-            delay: (el: any, i: number) => 45 * (i+1)
-          });
-      }
-
-      // Animasi untuk ML12 (Letter Spacing)
-      if (document.querySelector('.ml12') && currentStep === 6) {
-        const textWrapper = document.querySelector('.ml12');
-        if (textWrapper) {
-          textWrapper.innerHTML = textWrapper.textContent!.replace(/\S/g, "<span class='letter'>$&</span>");
-        }
-        
-        window.anime.timeline({loop: false})
-          .add({
-            targets: '.ml12 .letter',
-            translateX: [40,0],
-            translateZ: 0,
-            opacity: [0,1],
+            targets: '.animate-text',
+            opacity: [0, 1],
+            translateY: [20, 0],
             easing: "easeOutExpo",
             duration: 1200,
-            delay: (el: any, i: number) => 500 + 30 * i
-          });
-      }
-
-      // Animasi untuk ML16 (Letters Fade Down)
-      if (document.querySelector('.ml16') && currentStep === 7) {
-        const textWrapper = document.querySelector('.ml16');
-        if (textWrapper) {
-          textWrapper.innerHTML = textWrapper.textContent!.replace(/\S/g, "<span class='letter'>$&</span>");
-        }
-        
-        window.anime.timeline({loop: false})
-          .add({
-            targets: '.ml16 .letter',
-            translateY: [-100,0],
-            easing: "easeOutExpo",
-            duration: 1400,
-            delay: (el: any, i: number) => 30 * i
+            delay: 300
           });
       }
     }
@@ -279,7 +231,7 @@ export default function Home() {
     if ([1, 2, 4, 5, 6, 7].includes(currentStep)) {
       const timer = setTimeout(() => {
         setCurrentStep(currentStep + 1);
-      }, 7000); // Durasi 7 detik untuk transisi
+      }, 5000); // Kurangi durasi menjadi 5 detik agar lebih cepat
       
       return () => clearTimeout(timer);
     }
@@ -342,7 +294,7 @@ export default function Home() {
         setCurrentStep(1);
       }
     }
-  }, [currentStep, isSweetAlertLoaded]); // Include isSweetAlertLoaded as dependency
+  }, [currentStep, isSweetAlertLoaded]);
 
   // Fungsi untuk toggle play/pause
   const togglePlay = () => {
@@ -587,15 +539,26 @@ export default function Home() {
               </span>
             </h1>
             <h2 className="medium-text">Selamat datang di ucapan Lebaran 2025</h2>
+            <div className="mosque-container">
+              <Image 
+                src="/img/mosque.svg" 
+                alt="Masjid" 
+                width={150} 
+                height={150} 
+                className="mosque-animation"
+                priority
+                unoptimized
+              />
+            </div>
           </div>
         </div>
       )}
 
-      {/* Step 2: Judul dengan Animasi ML3 */}
+      {/* Step 2: Judul dengan Animasi Sederhana */}
       {currentStep === 2 && (
         <div className="fullscreen-container step-2 animate-fade-in">
           <div className="centered-content">
-            <h1 className="ml3">Selamat Hari Raya Idul Fitri 1446 H</h1>
+            <h1 className="animate-text">Selamat Hari Raya Idul Fitri 1446 H</h1>
             <div className="svg-container lantern-animation">
               <Image 
                 src="/asset/lentera-1.svg" 
@@ -648,47 +611,96 @@ export default function Home() {
         </div>
       )}
 
-      {/* Step 4: Pesan dengan Animasi ML6 */}
+      {/* Step 4: Pesan dengan Animasi Sederhana */}
       {currentStep === 4 && (
         <div className="fullscreen-container step-4 animate-fade-in">
           <div className="centered-content">
-            <h1 className="ml6">
-              <span className="text-wrapper">
-                <span className="letters">Mohon Maaf Lahir dan Batin</span>
-              </span>
-            </h1>
+            <h1 className="animate-text">Mohon Maaf Lahir dan Batin</h1>
+            <div className="bedug-container">
+              <Image 
+                src="/img/bedug.svg" 
+                alt="Bedug" 
+                width={120} 
+                height={120} 
+                className="bedug-animation"
+                priority
+                unoptimized
+              />
+            </div>
           </div>
         </div>
       )}
 
-      {/* Step 5: Pesan dengan Animasi ML9 */}
+      {/* Step 5: Pesan dengan Animasi Sederhana */}
       {currentStep === 5 && (
         <div className="fullscreen-container step-5 animate-fade-in">
           <div className="centered-content">
-            <h1 className="ml9">
-              <span className="text-wrapper">
-                <span className="letters">Semoga Taqwa Kita Diterima</span>
-              </span>
-            </h1>
+            <h1 className="animate-text">Semoga Taqwa Kita Diterima</h1>
+            <div className="praying-container">
+              <Image 
+                src="/img/praying.svg" 
+                alt="Praying" 
+                width={150} 
+                height={150} 
+                className="praying-animation"
+                priority
+                unoptimized
+              />
+            </div>
           </div>
         </div>
       )}
 
-      {/* Step 6: Pesan dengan Animasi ML12 */}
+      {/* Step 6: Pesan dengan Animasi Sederhana dan Sparkles */}
       {currentStep === 6 && (
         <div className="fullscreen-container step-6 animate-fade-in">
-          <div className="centered-content">
-            <h1 className="ml12">Taqabbalallahu minna wa minkum</h1>
+          <div className="centered-content sparkles-container">
+            <h1 className="animate-text">Taqabbalallahu minna wa minkum</h1>
             <h2 className="special-text">Minal Aidin wal Faizin</h2>
+            
+            <div className="sparkles-wrapper">
+              <SparklesCore
+                background="transparent"
+                minSize={0.6}
+                maxSize={1.4}
+                particleDensity={70}
+                className="w-full h-full absolute top-0 left-0"
+                particleColor="#FFD700"
+                speed={1}
+              />
+            </div>
+            
+            <div className="alquran-container">
+              <Image 
+                src="/img/alquran.svg" 
+                alt="Al-Quran" 
+                width={100} 
+                height={100} 
+                className="alquran-animation"
+                priority
+                unoptimized
+              />
+            </div>
           </div>
         </div>
       )}
 
-      {/* Step 7: Pesan dengan Animasi ML16 */}
+      {/* Step 7: Pesan dengan Animasi Sederhana */}
       {currentStep === 7 && (
         <div className="fullscreen-container step-7 animate-fade-in">
           <div className="centered-content">
-            <h1 className="ml16">Mari Rayakan Kemenangan</h1>
+            <h1 className="animate-text">Mari Rayakan Kemenangan</h1>
+            <div className="crescent-animation-container">
+              <Image 
+                src="/img/crescent-moon.svg" 
+                alt="Bulan Sabit" 
+                width={120} 
+                height={120} 
+                className="crescent-moon-animation"
+                priority
+                unoptimized
+              />
+            </div>
           </div>
         </div>
       )}
@@ -708,7 +720,7 @@ export default function Home() {
                   animationDuration: `${3 + Math.random() * 2}s`
                 }}>
                   <Image 
-                    src={i % 2 === 0 ? "/asset/lentera-1.svg" : "/asset/lentera-2.svg"} 
+                    src={i % 3 === 0 ? "/asset/lentera-1.svg" : i % 3 === 1 ? "/asset/lentera-2.svg" : "/img/lantern.svg"} 
                     alt="Lentera" 
                     width={80} 
                     height={120} 

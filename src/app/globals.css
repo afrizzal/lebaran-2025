@@ -1,7 +1,5 @@
 /* Import font */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');
 
 :root {
   --primary-color: #00A86B; /* Hijau untuk tema Lebaran */
@@ -78,6 +76,7 @@ body::before {
   align-items: center;
   z-index: 10;
   overflow: hidden;
+  padding: 20px;
 }
 
 .animate-fade-in {
@@ -92,6 +91,7 @@ body::before {
 .centered-content {
   text-align: center;
   max-width: 800px;
+  width: 90%;
   padding: 30px;
   background: rgba(255, 255, 255, 0.85);
   border-radius: 20px;
@@ -99,6 +99,7 @@ body::before {
   position: relative;
   overflow: hidden;
   z-index: 10;
+  margin: 0 auto;
 }
 
 .centered-content::before {
@@ -114,7 +115,7 @@ body::before {
 }
 
 .big-text {
-  font-size: 4rem;
+  font-size: 3.5rem;
   font-weight: bold;
   color: var(--primary-color);
   margin-bottom: 20px;
@@ -123,13 +124,12 @@ body::before {
 }
 
 .medium-text {
-  font-size: 2rem;
+  font-size: 1.8rem;
   color: var(--light-text-color);
   margin-top: 20px;
 }
 
 .elegant-text {
-  font-family: 'Amiri', serif;
   font-size: 2.5rem;
   color: var(--primary-color);
   line-height: 1.4;
@@ -137,8 +137,7 @@ body::before {
 }
 
 .special-text {
-  font-family: 'Amiri', serif;
-  font-size: 4rem;
+  font-size: 3.5rem;
   font-weight: bold;
   background: var(--gold-gradient);
   -webkit-background-clip: text;
@@ -146,18 +145,12 @@ body::before {
   margin-top: 20px;
   position: relative;
   display: inline-block;
-  animation: glow 2s ease-in-out infinite, bounce 2s ease-in-out infinite;
+  animation: glow 2s ease-in-out infinite;
 }
 
 @keyframes glow {
   0%, 100% { text-shadow: 0 0 5px rgba(212, 175, 55, 0.5); }
   50% { text-shadow: 0 0 20px rgba(212, 175, 55, 0.8), 0 0 30px rgba(212, 175, 55, 0.6); }
-}
-
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-  40% { transform: translateY(-20px); }
-  60% { transform: translateY(-10px); }
 }
 
 .chat-container {
@@ -398,6 +391,7 @@ body::before {
 .greeting-card {
   position: relative;
   max-width: 600px;
+  width: 90%;
   margin: 50px auto;
   padding: 40px;
   background: white;
@@ -428,11 +422,11 @@ body::before {
 }
 
 .profile-circle {
-  width: 200px;
-  height: 200px;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
   overflow: hidden;
-  margin: -120px auto 20px;
+  margin: -90px auto 20px;
   border: 5px solid var(--primary-color);
   box-shadow: 0 5px 15px rgba(0, 168, 107, 0.3);
   animation: pulse 2s infinite;
@@ -441,10 +435,10 @@ body::before {
 
 .ketupat {
   position: absolute;
-  top: -30px;
+  top: -10px;
   right: -10px;
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
   background-color: var(--accent-color);
   transform: rotate(45deg);
   z-index: 2;
@@ -476,7 +470,7 @@ body::before {
 
 .title {
   color: var(--primary-color);
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   margin-bottom: 20px;
   animation: colorChange 5s infinite;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
@@ -496,6 +490,11 @@ body::before {
   position: relative;
   animation: messageGlow 3s infinite;
   border: 1px solid rgba(0, 168, 107, 0.1);
+}
+
+.message p {
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
 .sender {
@@ -647,28 +646,31 @@ body::before {
 
 .response-buttons {
   position: fixed;
-  bottom: 30px;
+  bottom: 20px;
   left: 0;
   width: 100%;
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 15px;
   z-index: 30;
+  padding: 0 15px;
 }
 
 .like-btn, .restart-btn {
   background: var(--primary-color);
   color: white;
   border: none;
-  padding: 12px 35px;
+  padding: 10px 30px;
   border-radius: 30px;
-  font-size: 1.1rem;
-  font-weight: bold;
+  font-size: 1rem;
+  font-weight: 500;
   cursor: pointer;
   box-shadow: 0 5px 15px rgba(0, 168, 107, 0.3);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  flex: 1;
+  max-width: 200px;
 }
 
 .like-btn::before, .restart-btn::before {
@@ -715,10 +717,6 @@ body::before {
   50% { transform: translateY(-15px); }
 }
 
-.mosque-animation {
-  margin-top: 30px;
-}
-
 .lantern-animation {
   display: flex;
   justify-content: space-around;
@@ -751,31 +749,19 @@ body::before {
   50% { filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8)); }
 }
 
-.alquran-animation {
-  position: absolute;
-  bottom: -60px;
-  right: 20px;
-  height: 80px;
+/* Animasi teks */
+.animate-text {
+  opacity: 0;
+  transform: translateY(20px);
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  font-weight: 600;
+  line-height: 1.4;
 }
 
-.praying-animation {
-  margin-top: 30px;
-}
-
-.bedug-animation {
-  margin-top: 30px;
-  animation: bedugBeat 1s ease-in-out infinite;
-}
-
-@keyframes bedugBeat {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-}
-
-/* Animasi teks dari tobiasahlin.com/moving-letters/ */
 .ml1 {
-  font-weight: 900;
-  font-size: 3.5em;
+  font-weight: 700;
+  font-size: 3rem;
 }
 
 .ml1 .letter {
@@ -804,123 +790,133 @@ body::before {
 .ml1 .line1 { top: 0; }
 .ml1 .line2 { bottom: 0; }
 
-.ml3 {
-  font-weight: 900;
-  font-size: 3.5em;
+/* Tambahan untuk SVG baru */
+.mosque-container {
+  margin-top: 30px;
 }
 
-.ml3 .letter {
-  display: inline-block;
-  opacity: 0;
+.mosque-animation {
+  animation: pulseAndFloat 6s ease-in-out infinite;
+  filter: drop-shadow(0 0 10px rgba(0, 168, 107, 0.3));
 }
 
-.ml6 {
+@keyframes pulseAndFloat {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-10px) scale(1.05); }
+}
+
+.bedug-container {
+  margin-top: 30px;
+}
+
+.bedug-animation {
+  animation: bedugBeat 1.5s ease-in-out infinite;
+}
+
+@keyframes bedugBeat {
+  0%, 100% { transform: scale(1); }
+  30% { transform: scale(1.1); }
+  50% { transform: scale(0.95); }
+  70% { transform: scale(1.05); }
+}
+
+.praying-container {
+  margin-top: 30px;
+}
+
+.praying-animation {
+  animation: prayingGlow 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 5px rgba(0, 168, 107, 0.3));
+}
+
+@keyframes prayingGlow {
+  0%, 100% { filter: drop-shadow(0 0 5px rgba(0, 168, 107, 0.3)); transform: scale(1); }
+  50% { filter: drop-shadow(0 0 15px rgba(0, 168, 107, 0.6)); transform: scale(1.05); }
+}
+
+.alquran-container {
+  margin-top: 30px;
+}
+
+.alquran-animation {
+  animation: alquranFloat 5s ease-in-out infinite;
+  filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.5));
+}
+
+@keyframes alquranFloat {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-10px) rotate(3deg); }
+}
+
+.crescent-animation-container {
+  margin-top: 30px;
+}
+
+.crescent-moon-animation {
+  animation: moonRotate 10s linear infinite;
+  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+}
+
+@keyframes moonRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Sparkles Container Styles */
+.sparkles-container {
   position: relative;
-  font-weight: 900;
-  font-size: 3.3em;
-}
-
-.ml6 .text-wrapper {
-  position: relative;
-  display: inline-block;
-  padding-top: 0.2em;
-  padding-right: 0.05em;
-  padding-bottom: 0.1em;
   overflow: hidden;
 }
 
-.ml6 .letter {
-  display: inline-block;
-  line-height: 1em;
-}
-
-.ml9 {
-  position: relative;
-  font-weight: 200;
-  font-size: 4em;
-}
-
-.ml9 .text-wrapper {
-  position: relative;
-  display: inline-block;
-  padding-top: 0.2em;
-  padding-right: 0.05em;
-  padding-bottom: 0.1em;
-  overflow: hidden;
-}
-
-.ml9 .letter {
-  transform-origin: 50% 100%;
-  display: inline-block;
-  line-height: 1em;
-}
-
-.ml12 {
-  font-weight: 200;
-  font-size: 1.8em;
-  text-transform: uppercase;
-  letter-spacing: 0.5em;
-}
-
-.ml12 .letter {
-  display: inline-block;
-  line-height: 1em;
-}
-
-.ml16 {
-  color: var(--primary-color);
-  padding: 40px 0;
-  font-weight: 800;
-  font-size: 2em;
-  text-transform: uppercase;
-  letter-spacing: 0.5em;
-  overflow: hidden;
-}
-
-.ml16 .letter {
-  display: inline-block;
-  line-height: 1em;
+.sparkles-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
 }
 
 /* Responsivitas */
 @media (max-width: 768px) {
   .big-text {
-    font-size: 3rem;
+    font-size: 2.5rem;
   }
   
   .medium-text {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
   
   .elegant-text {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
   
   .special-text {
-    font-size: 3rem;
+    font-size: 2.5rem;
   }
   
   .greeting-card {
-    margin: 80px 20px;
-    padding: 20px;
+    margin: 70px auto 20px;
+    padding: 30px 20px;
   }
 
   .profile-circle {
-    width: 150px;
-    height: 150px;
-    margin: -80px auto 15px;
+    width: 130px;
+    height: 130px;
+    margin: -75px auto 15px;
   }
 
   .title {
+    font-size: 1.8rem;
+  }
+  
+  .animate-text {
     font-size: 2rem;
   }
   
-  .ml1, .ml3, .ml6, .ml9 {
-    font-size: 2.5em;
-  }
-  
-  .ml12, .ml16 {
-    font-size: 1.5em;
+  .ml1 {
+    font-size: 2.5rem;
   }
   
   .svg-container {
@@ -943,11 +939,11 @@ body::before {
 
 @media (max-width: 480px) {
   .big-text {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
   
   .medium-text {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
   
   .elegant-text {
@@ -955,22 +951,22 @@ body::before {
   }
   
   .special-text {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
   
   .greeting-card {
-    margin: 70px 15px;
-    padding: 15px;
+    margin: 60px auto 15px;
+    padding: 25px 15px;
   }
 
   .profile-circle {
-    width: 120px;
-    height: 120px;
-    margin: -70px auto 10px;
+    width: 100px;
+    height: 100px;
+    margin: -60px auto 10px;
   }
 
   .title {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
   }
 
   .message {
@@ -981,13 +977,12 @@ body::before {
     font-size: 0.9rem;
   }
   
-  .ml1, .ml3, .ml6, .ml9 {
-    font-size: 2em;
+  .animate-text {
+    font-size: 1.6rem;
   }
   
-  .ml12, .ml16 {
-    font-size: 1.2em;
-    letter-spacing: 0.3em;
+  .ml1 {
+    font-size: 2rem;
   }
   
   .svg-container {
@@ -1005,18 +1000,17 @@ body::before {
   .response-buttons {
     flex-direction: column;
     align-items: center;
-    gap: 10px;
     bottom: 15px;
   }
   
   .like-btn, .restart-btn {
     padding: 8px 20px;
     font-size: 0.9rem;
+    max-width: 80%;
   }
   
   .centered-content {
     padding: 20px 15px;
-    margin: 0 15px;
   }
   
   .ornament {

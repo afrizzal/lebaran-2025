@@ -9,11 +9,12 @@ Lihat demo aplikasi di: [https://lebaran-2025.vercel.app/](https://lebaran-2025.
 ## Fitur
 
 - **Animasi Interaktif**: Tampilan dengan animasi dan efek visual yang menarik
-- **Personalisasi**: Kustomisasi nama keluarga melalui parameter URL
+- **Personalisasi**: Kustomisasi nama keluarga dan nomor WhatsApp melalui parameter URL
 - **Background Islami**: Desain dengan tema Ramadan yang profesional
 - **Responsif**: Tampilan optimal di semua ukuran layar (desktop, tablet, dan mobile)
 - **Integrasi WhatsApp**: Fitur untuk membalas ucapan langsung melalui WhatsApp
 - **Efek Visual Menarik**: Background dengan ornamen islami, lentera, berlian, dan efek visual lainnya
+- **Sparkles Effect**: Efek particle berkilauan pada bagian ucapan "Taqabbalallahu minna wa minkum"
 
 ## Cara Penggunaan
 
@@ -23,15 +24,21 @@ Lihat demo aplikasi di: [https://lebaran-2025.vercel.app/](https://lebaran-2025.
 2. Ikuti alur animasi dan pesan yang muncul secara berurutan
 3. Lihat kartu ucapan di akhir
 
-### Personalisasi Nama Keluarga
+### Personalisasi Nama Keluarga dan Nomor WhatsApp
 
-Untuk menyesuaikan nama keluarga, tambahkan parameter `nama_keluarga` di URL:
+Untuk menyesuaikan nama keluarga dan nomor WhatsApp tujuan, tambahkan parameter di URL:
 
 ```
-https://lebaran-2025.vercel.app/?nama_keluarga=Keluarga+Budi
+https://lebaran-2025.vercel.app/?nama_keluarga=Keluarga+Budi&nomor_wa=081234567890
 ```
 
-Ganti `Keluarga+Budi` dengan nama yang Anda inginkan (gunakan tanda + untuk spasi).
+Parameter yang tersedia:
+- `nama_keluarga`: Nama keluarga pengirim (gunakan tanda + untuk spasi)
+- `nomor_wa`: Nomor WhatsApp yang akan menerima balasan (format Indonesia)
+
+Format nomor WhatsApp:
+- Dapat diawali dengan "0", "62", atau "+62"
+- Aplikasi akan otomatis memformat nomor sesuai format WhatsApp
 
 ### Membalas Ucapan
 
@@ -45,12 +52,18 @@ Klik tombol "Ulangi" di bagian bawah untuk melihat rangkaian animasi dari awal l
 
 ## Teknologi
 
-- Next.js
+- Next.js 15
 - TypeScript
-- GSAP/Anime.js untuk animasi
+- Anime.js untuk animasi teks
 - SweetAlert2 untuk dialog interaktif
 - CSS Animations
 - SVG untuk elemen visual
+- Framer Motion untuk efek sparkles/particle
+
+## Credits
+
+### Musik
+Music by [FASSounds](https://pixabay.com/users/fassounds-3433550) from [Pixabay](https://pixabay.com)
 
 ## Pengembangan Lokal
 
@@ -72,13 +85,26 @@ Klik tombol "Ulangi" di bagian bawah untuk melihat rangkaian animasi dari awal l
 
 4. Buka [http://localhost:3000](http://localhost:3000) di browser Anda
 
-## Deployment
+## Deployment ke Vercel
 
-Aplikasi ini telah di-deploy di Vercel. Untuk melakukan deployment Anda sendiri:
+Aplikasi ini sudah dikonfigurasi untuk deployment otomatis ke Vercel. Untuk melakukan deployment:
 
-1. Fork repository ini
-2. Connect repository ke akun Vercel Anda
-3. Deploy dengan default settings
+1. Fork atau clone repository ini
+2. Connect repository ke akun Vercel Anda di https://vercel.com/import
+3. Pilih repository dan klik "Import"
+4. Vercel akan otomatis mendeteksi konfigurasi Next.js
+5. Klik "Deploy" dan aplikasi Anda akan di-build dan di-deploy
+
+Secara default, Vercel akan men-deploy pada domain `https://[nama-project].vercel.app`. Anda juga dapat menambahkan custom domain di dashboard Vercel.
+
+### Troubleshooting Deployment
+
+Jika Anda mengalami masalah saat deployment:
+
+1. Pastikan semua dependencies tercantum di package.json
+2. Periksa bahwa framer-motion telah terinstal dengan `npm install framer-motion`
+3. Pastikan versi Node.js kompatibel (rekomendasi: Node.js 18 atau lebih tinggi)
+4. Review log build di dashboard Vercel untuk detail error
 
 ## Kontribusi
 
