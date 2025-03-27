@@ -35,6 +35,12 @@ export default function Home() {
   const [familyName, setFamilyName] = useState<string>('Al-Batul');
   const [phoneNumber, setPhoneNumber] = useState('6281234567890'); // Default dengan kode Indonesia
   const chatMessage = "Selamat Hari Raya Idul Fitri, mohon maaf lahir dan batin. Semoga kita selalu diberikan kesehatan, kebahagiaan, dan keberkahan dalam hidup. Taqabbalallahu minna wa minkum.";
+  
+  // Tambahkan state untuk loading animation
+  const [isLoading, setIsLoading] = useState(true);
+  
+  // Tambahkan state untuk parallax effect
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   // Mengambil nama keluarga dan nomor telepon dari URL
   useEffect(() => {
@@ -439,6 +445,104 @@ export default function Home() {
     );
   };
 
+  // Di bagian useEffect yang mengatur animasi text ketika step > 0
+  useEffect(() => {
+    if (currentStep > 0 && typeof window !== 'undefined' && window.anime) {
+      // Meningkatkan durasi animasi text
+      setTimeout(() => {
+        const textElements = document.querySelectorAll('.animate-text');
+        textElements.forEach((element, index) => {
+          window.anime.timeline({loop: false})
+            .add({
+              targets: element,
+              opacity: [0,1],
+              translateY: [50,0],
+              easing: "easeOutExpo",
+              duration: 2000, // Meningkatkan durasi dari 1200 ke 2000
+              delay: (_el: any, _i: number) => 300 + 100 * _i
+            });
+        });
+      }, 300);
+    }
+  }, [currentStep]);
+
+  // Modifikasi kode untuk inisialisasi animasi ketika dokumen dimuat
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      document.body.classList.add('entrance-animate');
+      
+      // Menambahkan kelas entrance-animate ke semua container fullscreen setelah animasi entrance selesai
+      setTimeout(() => {
+        const containers = document.querySelectorAll('.fullscreen-container');
+        containers.forEach(container => {
+          if (container instanceof HTMLElement) {
+            container.classList.add('entrance-ready');
+          }
+        });
+      }, 1200);
+    }
+  }, []);
+
+  // Di bagian typingEffect, tambahkan durasi yang lebih lama
+  const typingEffect = async (text: string, element: HTMLElement, delay = 50) => {
+    // Meningkatkan delay untuk text yang lebih panjang
+    const adjustedDelay = text.length > 100 ? 40 : (text.length > 50 ? 45 : 50);
+    
+    // ... existing code untuk typing effect ...
+  };
+
+  // Add useEffect for parallax animation
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({
+        x: e.clientX / window.innerWidth,
+        y: e.clientY / window.innerHeight
+      });
+    };
+    
+    window.addEventListener('mousemove', handleMouseMove);
+    
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+  
+  // Add useEffect for loading animation
+  useEffect(() => {
+    // Preload critical assets
+    const imageUrls = [
+      '/asset/background.svg',
+      '/img/profile.jpg',
+      '/asset/moon.svg',
+      '/asset/lentera-1.svg',
+      '/asset/lentera-2.svg'
+    ];
+    
+    const preloadImages = async () => {
+      const promises = imageUrls.map((url) => {
+        return new Promise((resolve, reject) => {
+          const img = new globalThis.Image();
+          img.src = url;
+          img.onload = resolve;
+          img.onerror = reject;
+        });
+      });
+      
+      try {
+        await Promise.all(promises);
+        // Delay to ensure smooth loading transition
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 1500);
+      } catch (error) {
+        console.error('Failed to preload images', error);
+        setIsLoading(false);
+      }
+    };
+    
+    preloadImages();
+  }, []);
+
   return (
     <>
       {/* Debugging info - hanya muncul jika ada error */}
@@ -538,7 +642,7 @@ export default function Home() {
                 <span className="line line2"></span>
               </span>
             </h1>
-            <h2 className="medium-text">Selamat datang di ucapan Lebaran 2025</h2>
+            <h2 className="medium-text">Selamat Hari Raya Idul Fitri 1446 H</h2>
             <div className="mosque-container">
               <Image 
                 src="/img/mosque.svg" 
@@ -558,7 +662,7 @@ export default function Home() {
       {currentStep === 2 && (
         <div className="fullscreen-container step-2 animate-fade-in">
           <div className="centered-content">
-            <h1 className="animate-text">Selamat Hari Raya Idul Fitri 1446 H</h1>
+            <h1 className="animate-text">Di hari yang penuh berkah ini, mari kita sambut kemenangan.</h1>
             <div className="svg-container lantern-animation">
               <Image 
                 src="/asset/lentera-1.svg" 
@@ -689,7 +793,7 @@ export default function Home() {
       {currentStep === 7 && (
         <div className="fullscreen-container step-7 animate-fade-in">
           <div className="centered-content">
-            <h1 className="animate-text">Mari Rayakan Kemenangan</h1>
+            <h1 className="animate-text">Meski jarak memisahkan kita, kebahagiaan tetap bisa kita rasakan bersama.</h1>
             <div className="crescent-animation-container">
               <Image 
                 src="/img/crescent-moon.svg" 
@@ -709,7 +813,15 @@ export default function Home() {
       {currentStep === 8 && (
         <div className="fullscreen-container step-8 animate-fade-in">
           <div className="centered-content">
-            <h2 className="elegant-text fade-in">Sebentar lagi...</h2>
+            <h2 className="elegant-text fade-in">Semoga Idul Fitri membawa keberkahan bagi kita semua dan menjadi momentum untuk mempererat persahabatan yang sudah terjalin.</h2>
+            {/* Tambahkan tombol untuk melanjutkan setelah membaca */}
+            <button 
+              onClick={() => setCurrentStep(9)} 
+              className="continue-btn blink-me" 
+              style={{ marginTop: '30px' }}
+            >
+              Lanjutkan
+            </button>
           </div>
           {showLanterns && (
             <div className="lanterns-container">
@@ -738,21 +850,23 @@ export default function Home() {
       {/* Step 9: Ucapan Lebaran */}
       {currentStep === 9 && (
         <div className="fullscreen-container step-9 animate-fade-in">
-          <div className="greeting-card">
-            <div className="profile-circle">
-              <Image 
-                src="/img/profile.jpg" 
-                alt="Foto Profil" 
-                className="profile-img" 
-                width={300}
-                height={300}
-                priority
-                unoptimized
-              />
+          <div className="greeting-card tilt-card">
+            <div className="profile-frame">
+              <div className="profile-inner">
+                <Image 
+                  src="/img/profile.jpg" 
+                  alt="Foto Profil" 
+                  className="profile-img" 
+                  width={400}
+                  height={400}
+                  priority
+                  unoptimized
+                />
+              </div>
               <div className="ketupat"></div>
             </div>
             <div className="card-content">
-              <h1 className="title">SELAMAT HARI RAYA IDUL FITRI</h1>
+              <h1 className="title shimmer-text">SELAMAT HARI RAYA IDUL FITRI</h1>
               <div className="message">
                 <p>Taqabbalallahu minna wa minkum, shiyamana wa shiyamakum. Mohon maaf lahir dan batin atas segala khilaf dan salah. Semoga kita dipertemukan kembali di Ramadhan mendatang dalam keadaan yang lebih baik.</p>
                 <p className="sender">Dari: {familyName}</p>
@@ -805,6 +919,29 @@ export default function Home() {
               </div>
             ))}
           </div>
+
+          {/* Make ornaments more interactive */}
+          <div className="ornaments-container">
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className={`ornament hover-float ${
+                i % 3 === 0 ? 'ornament-yellow-big' : 
+                i % 3 === 1 ? 'ornament-green-medium' : 'ornament-yellow-small'
+              }`} style={{
+                left: `${15 + (i * 15)}%`,
+                top: `${10 + ((i % 3) * 20)}%`,
+                animationDelay: `${i * 0.5}s`
+              }}>
+                <Image 
+                  src={i % 2 === 0 ? '/asset/yellow-small.svg' : '/asset/green-small.svg'} 
+                  alt="Ornament" 
+                  width={i % 3 === 0 ? 120 : 80} 
+                  height={i % 3 === 0 ? 120 : 80}
+                  priority
+                  unoptimized
+                />
+              </div>
+            ))}
+          </div>
         </div>
       )}
 
@@ -815,6 +952,50 @@ export default function Home() {
           <button onClick={restartApp} className="restart-btn">Ulangi</button>
         </div>
       )}
+
+      {/* Add loading animation */}
+      <div className={`loading-animation ${isLoading ? '' : 'hidden'}`}>
+        <div className="loading-icon">
+          <div className="loading-circle"></div>
+          <div className="loading-circle"></div>
+          <div className="loading-circle"></div>
+        </div>
+      </div>
+      
+      {/* Add parallax background layers */}
+      <div className="parallax-bg">
+        <div 
+          className="parallax-layer layer-1" 
+          style={{ 
+            transform: `translate(${mousePosition.x * 10}px, ${mousePosition.y * 10}px)` 
+          }}
+        >
+          <Image 
+            src="/asset/green-big.svg" 
+            alt="Background Layer" 
+            fill
+            style={{ objectFit: "cover" }}
+            priority
+            unoptimized
+          />
+        </div>
+        <div 
+          className="parallax-layer layer-2" 
+          style={{ 
+            transform: `translate(${mousePosition.x * -15}px, ${mousePosition.y * -15}px)` 
+          }}
+        >
+          <Image 
+            src="/asset/yellow-big.svg" 
+            alt="Background Layer" 
+            fill
+            style={{ objectFit: "cover" }}
+            priority
+            unoptimized
+          />
+        </div>
+        <div className="radial-gradient-bg"></div>
+      </div>
     </>
   );
 }
