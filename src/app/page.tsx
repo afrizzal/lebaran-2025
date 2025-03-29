@@ -793,7 +793,7 @@ export default function Home() {
       {currentStep === 7 && (
         <div className="fullscreen-container step-7 animate-fade-in">
           <div className="centered-content">
-            <h1 className="animate-text">Meski jarak memisahkan kita, kebahagiaan tetap bisa kita rasakan bersama.</h1>
+            <h1 className="animate-text">Meski jarak memisahkan kita, semoga kebahagiaan tetap bisa kita rasakan bersama.</h1>
             <div className="crescent-animation-container">
               <Image 
                 src="/img/crescent-moon.svg" 
@@ -813,7 +813,7 @@ export default function Home() {
       {currentStep === 8 && (
         <div className="fullscreen-container step-8 animate-fade-in">
           <div className="centered-content">
-            <h2 className="elegant-text fade-in">Semoga Idul Fitri membawa keberkahan bagi kita semua dan menjadi momentum untuk mempererat persahabatan yang sudah terjalin.</h2>
+            <h2 className="elegant-text fade-in">Semoga Idul Fitri membawa keberkahan dan menjadi momentum untuk mempererat persahabatan yang sudah terjalin.</h2>
             {/* Tambahkan tombol untuk melanjutkan setelah membaca */}
             <button 
               onClick={() => setCurrentStep(9)} 
@@ -871,6 +871,16 @@ export default function Home() {
                 <p>Taqabbalallahu minna wa minkum, shiyamana wa shiyamakum. Mohon maaf lahir dan batin atas segala khilaf dan salah. Semoga kita dipertemukan kembali di Ramadhan mendatang dalam keadaan yang lebih baik.</p>
                 <p className="sender">Dari: {familyName}</p>
               </div>
+            </div>
+            
+            {/* Response buttons di dalam greeting-card tapi di luar card-content */}
+            <div className="response-buttons">
+              <button onClick={showResponse} className="like-btn">
+                <i className="fas fa-thumbs-up"></i> Balas
+              </button>
+              <button onClick={restartApp} className="restart-btn">
+                <i className="fas fa-redo"></i> Ulang
+              </button>
             </div>
           </div>
 
@@ -942,14 +952,6 @@ export default function Home() {
               </div>
             ))}
           </div>
-        </div>
-      )}
-
-      {/* Step 10: Respons */}
-      {currentStep === 9 && (
-        <div className="response-buttons">
-          <button onClick={showResponse} className="like-btn">Balas Ucapan</button>
-          <button onClick={restartApp} className="restart-btn">Ulangi</button>
         </div>
       )}
 
