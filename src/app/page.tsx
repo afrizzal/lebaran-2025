@@ -407,7 +407,7 @@ export default function Home() {
         animationDuration: `${10 + Math.random() * 10}s`,
         animationDelay: `${Math.random() * 5}s`
       }}>
-        <Image 
+        <Image
           src="/asset/diamond.svg" 
           alt="Diamond" 
           width={30} 
@@ -682,7 +682,7 @@ export default function Home() {
                 priority
                 unoptimized
               />
-              <Image 
+            <Image
                 src="/asset/lentera-2.svg" 
                 alt="Lentera" 
                 width={100} 
@@ -941,7 +941,7 @@ export default function Home() {
                 top: `${10 + ((i % 3) * 20)}%`,
                 animationDelay: `${i * 0.5}s`
               }}>
-                <Image 
+          <Image
                   src={i % 2 === 0 ? '/asset/yellow-small.svg' : '/asset/green-small.svg'} 
                   alt="Ornament" 
                   width={i % 3 === 0 ? 120 : 80} 
@@ -972,7 +972,7 @@ export default function Home() {
             transform: `translate(${mousePosition.x * 10}px, ${mousePosition.y * 10}px)` 
           }}
         >
-          <Image 
+          <Image
             src="/asset/green-big.svg" 
             alt="Background Layer" 
             fill
@@ -987,7 +987,7 @@ export default function Home() {
             transform: `translate(${mousePosition.x * -15}px, ${mousePosition.y * -15}px)` 
           }}
         >
-          <Image 
+          <Image
             src="/asset/yellow-big.svg" 
             alt="Background Layer" 
             fill
@@ -997,7 +997,7 @@ export default function Home() {
           />
         </div>
         <div className="radial-gradient-bg"></div>
-      </div>
+    </div>
     </>
   );
 }

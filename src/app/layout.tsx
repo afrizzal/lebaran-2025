@@ -6,21 +6,21 @@ import Script from 'next/script'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Ucapan Lebaran 2025 | Selamat Hari Raya Idul Fitri',
-  description: 'Ucapan Selamat Hari Raya Idul Fitri 1446 H dengan animasi dan efek visual interaktif',
+  title: 'Selamat Hari Raya Idul Fitri 1446 H',
+  description: 'Bila ada langkah membekas lara, ada kata merangkai dusta, ada tingkah menoreh luka, smoga masih ada maaf yang tersisa.',
   keywords: 'Lebaran, Idul Fitri, Ramadhan, Ucapan Lebaran, Greeting Card, Kartu Ucapan, Hari Raya',
   authors: [{ name: 'Lebaran Greetings Team' }],
   openGraph: {
-    title: 'Ucapan Lebaran 2025 | Selamat Hari Raya Idul Fitri',
-    description: 'Ucapan Selamat Hari Raya Idul Fitri 1446 H dengan animasi interaktif',
+    title: 'Selamat Hari Raya Idul Fitri 1446 H',
+    description: 'Bila ada langkah membekas lara, ada kata merangkai dusta, ada tingkah menoreh luka, smoga masih ada maaf yang tersisa.',
     images: ['/asset/og-image.jpg'],
     type: 'website',
-    siteName: 'Ucapan Lebaran 2025',
+    siteName: 'Selamat Hari Raya Idul Fitri',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Ucapan Lebaran 2025 | Selamat Hari Raya Idul Fitri',
-    description: 'Ucapan Selamat Hari Raya Idul Fitri 1446 H dengan animasi interaktif',
+    title: 'Selamat Hari Raya Idul Fitri 1446 H',
+    description: 'Bila ada langkah membekas lara, ada kata merangkai dusta, ada tingkah menoreh luka, smoga masih ada maaf yang tersisa.',
     images: ['/asset/og-image.jpg'],
   },
 }
