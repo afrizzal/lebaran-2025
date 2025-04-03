@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import { SparklesCore } from '@/components/ui/sparkles';
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 // Deklarasi tipe SweetAlert2
 declare global {
@@ -763,15 +763,7 @@ export default function Home() {
             <h2 className="special-text">Minal Aidin wal Faizin</h2>
             
             <div className="sparkles-wrapper">
-              <SparklesCore
-                background="transparent"
-                minSize={0.6}
-                maxSize={1.4}
-                particleDensity={70}
-                className="w-full h-full absolute top-0 left-0"
-                particleColor="#FFD700"
-                speed={1}
-              />
+              {/* Placeholder for SparklesCore component */}
             </div>
             
             <div className="alquran-container">

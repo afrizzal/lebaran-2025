@@ -2,17 +2,18 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Script from 'next/script'
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Selamat Hari Raya Idul Fitri 1446 H',
-  description: 'Bila ada langkah membekas lara, ada kata merangkai dusta, ada tingkah menoreh luka, smoga masih ada maaf yang tersisa.',
+  description: 'Bila ada langkah membekas lara, ada kata merangkai dusta, smoga ada maaf yang tersisa.',
   keywords: 'Lebaran, Idul Fitri, Ramadhan, Ucapan Lebaran, Greeting Card, Kartu Ucapan, Hari Raya',
   authors: [{ name: 'Lebaran Greetings Team' }],
   openGraph: {
     title: 'Selamat Hari Raya Idul Fitri 1446 H',
-    description: 'Bila ada langkah membekas lara, ada kata merangkai dusta, ada tingkah menoreh luka, smoga masih ada maaf yang tersisa.',
+    description: 'Bila ada langkah membekas lara, ada kata merangkai dusta, smoga ada maaf yang tersisa.',
     images: ['/asset/og-image.jpg'],
     type: 'website',
     siteName: 'Selamat Hari Raya Idul Fitri',
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Selamat Hari Raya Idul Fitri 1446 H',
-    description: 'Bila ada langkah membekas lara, ada kata merangkai dusta, ada tingkah menoreh luka, smoga masih ada maaf yang tersisa.',
+    description: 'Bila ada langkah membekas lara, ada kata merangkai dusta, smoga ada maaf yang tersisa.',
     images: ['/asset/og-image.jpg'],
   },
 }
